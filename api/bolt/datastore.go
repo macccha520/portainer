@@ -300,6 +300,11 @@ func (store *Store) EdgeGroup() portainer.EdgeGroupService {
 	return store.EdgeGroupService
 }
 
+// EdgeJob gives access to the EdgeJob data management layer
+func (store *Store) EdgeJob() portainer.EdgeJobService {
+	return store.EdgeJobService
+}
+
 // EdgeStack gives access to the EdgeStack data management layer
 func (store *Store) EdgeStack() portainer.EdgeStackService {
 	return store.EdgeStackService
