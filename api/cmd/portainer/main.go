@@ -157,7 +157,7 @@ func loadSnapshotSystemSchedule(jobScheduler portainer.JobScheduler, snapshotter
 	return nil
 }
 
-func loadEdgeJobsFromDatabase(jobScheduler portainer.JobScheduler, jobService portainer.JobService, dataStore portainer.DataStore, fileService portainer.FileService, reverseTunnelService portainer.ReverseTunnelService) error {
+func loadEdgeJobsFromDatabase(dataStore portainer.DataStore, reverseTunnelService portainer.ReverseTunnelService) error {
 	edgeJobs, err := dataStore.EdgeJob().EdgeJobs()
 	if err != nil {
 		return err
@@ -422,7 +422,7 @@ func main() {
 
 	jobScheduler := initJobScheduler()
 
-	err = loadEdgeJobsFromDatabase(jobScheduler, jobService, dataStore, fileService, reverseTunnelService)
+	err = loadEdgeJobsFromDatabase(dataStore, reverseTunnelService)
 	if err != nil {
 		log.Fatal(err)
 	}
