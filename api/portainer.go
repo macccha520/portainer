@@ -85,7 +85,6 @@ type (
 		Registry() RegistryService
 		ResourceControl() ResourceControlService
 		Role() RoleService
-		Schedule() ScheduleService
 		Settings() SettingsService
 		Stack() StackService
 		Tag() TagService
@@ -438,18 +437,13 @@ type (
 	// NOTE: The Recurring option is only used by ScriptExecutionJob at the moment
 	// Deprecated in favor of EdgeJob
 	Schedule struct {
-		ID                 ScheduleID `json:"Id"`
-		Name               string
-		CronExpression     string
-		Recurring          bool
-		Created            int64
-		JobType            JobType
-		EdgeSchedule       *EdgeSchedule
-		ScriptExecutionJob *ScriptExecutionJob
-		SnapshotJob        *SnapshotJob
-
-		// Deprecated fields
-		EndpointSyncJob *EndpointSyncJob
+		ID             ScheduleID `json:"Id"`
+		Name           string
+		CronExpression string
+		Recurring      bool
+		Created        int64
+		JobType        JobType
+		EdgeSchedule   *EdgeSchedule
 	}
 
 	// ScheduleID represents a schedule identifier.
@@ -503,9 +497,6 @@ type (
 		StackCount              int         `json:"StackCount"`
 		SnapshotRaw             SnapshotRaw `json:"SnapshotRaw"`
 	}
-
-	// SnapshotJob represents a scheduled job that can create endpoint snapshots
-	SnapshotJob struct{}
 
 	// SnapshotRaw represents all the information related to a snapshot as returned by the Docker API
 	SnapshotRaw struct {
@@ -918,18 +909,6 @@ type (
 		Roles() ([]Role, error)
 		CreateRole(role *Role) error
 		UpdateRole(ID RoleID, role *Role) error
-	}
-
-	// ScheduleService represents a service for managing schedule data
-	// Deprecated in favor of EdgeJobService
-	ScheduleService interface {
-		Schedule(ID ScheduleID) (*Schedule, error)
-		Schedules() ([]Schedule, error)
-		SchedulesByJobType(jobType JobType) ([]Schedule, error)
-		CreateSchedule(schedule *Schedule) error
-		UpdateSchedule(ID ScheduleID, schedule *Schedule) error
-		DeleteSchedule(ID ScheduleID) error
-		GetNextIdentifier() int
 	}
 
 	// SettingsService represents a service for managing application settings
