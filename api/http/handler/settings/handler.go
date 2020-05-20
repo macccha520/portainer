@@ -7,6 +7,7 @@ import (
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/http/security"
+	"github.com/portainer/portainer/api/internal/snapshot"
 )
 
 func hideFields(settings *portainer.Settings) {
@@ -20,7 +21,7 @@ type Handler struct {
 	DataStore            portainer.DataStore
 	LDAPService          portainer.LDAPService
 	FileService          portainer.FileService
-	JobScheduler         portainer.JobScheduler
+	SnapshotService      *snapshot.Service
 	AuthorizationService *portainer.AuthorizationService
 }
 
