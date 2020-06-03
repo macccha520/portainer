@@ -519,9 +519,8 @@ type (
 
 	// Status represents the application status
 	Status struct {
-		Authentication bool   `json:"Authentication"`
-		Analytics      bool   `json:"Analytics"`
-		Version        string `json:"Version"`
+		Analytics bool   `json:"Analytics"`
+		Version   string `json:"Version"`
 	}
 
 	// Tag represents a tag that can be associated to a resource
@@ -842,7 +841,7 @@ type (
 
 	// JWTService represents a service for managing JWT tokens
 	JWTService interface {
-		GenerateToken(data *TokenData, timeout string) (string, error)
+		GenerateToken(data *TokenData) (string, error)
 		ParseAndVerifyToken(token string) (*TokenData, error)
 	}
 
